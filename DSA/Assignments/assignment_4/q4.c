@@ -1,6 +1,3 @@
-Certainly, here are some additional comments added to the code to provide further clarity:
-
-```c
 #include <stdio.h>
 #include <stdlib.h>
 
