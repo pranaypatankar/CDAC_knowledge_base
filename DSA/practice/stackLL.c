@@ -70,6 +70,11 @@ int main() {
 void push(struct node **p, int ele) {
     struct node *temp;
     temp = (struct node *)malloc(sizeof(struct node));
+    if(temp=NULL){
+        prinrf("Memory not allocated\n");
+        return;
+    }
+    
     temp->data = ele;
     temp->next = *p;
     *p = temp; // Make the newly added node the new head
