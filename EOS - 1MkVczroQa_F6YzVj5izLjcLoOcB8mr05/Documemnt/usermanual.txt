@@ -1,0 +1,39 @@
+User Manual: Setting up U-Boot and Linux Kernel for BeagleBone on Ubuntu
+	Step 1: Install Cross-Compiler
+
+    	Open a terminal on your Ubuntu machine.
+   	Run the following commands to install the cross-compiler:
+		$sudo apt-get update
+		$sudo apt-get install gcc-arm-linux-gnueabihf
+
+Step 2: Compile U-Boot
+    	Clone the U-Boot repository and navigate to the U-Boot directory:
+		$git clone https://github.com/u-boot/u-boot.git
+		$cd u-boot
+
+	Configure U-Boot for BeagleBone:
+		$make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_defconfig
+
+	Compile U-Boot:
+
+		$make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j 8
+
+Step 3: Compile the Linux Kernel
+
+   	Clone the Linux kernel repository and navigate to the Linux directory:
+		$git clone https://github.com/beagleboard/linux.git -b 5.10.168-ti-r72 --depth=1
+		$cd linux
+
+	Configure the Linux kernel for BeagleBone:
+		$make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- omap2plus_defconfig
+
+	Optionally, customize the kernel configuration:
+		$make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+
+	Compile the Linux kernel:
+		$make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x82000000 –j 8
+		
+Step 4:	Flashing SD card
+	
+	Insert SD card in computer
+
