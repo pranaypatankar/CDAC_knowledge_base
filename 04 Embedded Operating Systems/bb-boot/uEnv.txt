@@ -1,0 +1,10 @@
+kernel=uImage
+dtb=am335x-boneblack.dtb
+
+loadaddr=0x82000000
+fdtaddr=0x88000000
+
+console=ttyS0,115200n8
+netargs=setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait debug earlyprintk mem=512M
+netboot=echo Booting from microSD ...; setenv autoload no ; load mmc 0:1 ${loadaddr} ${kernel} ; load mmc 0:1 ${fdtaddr} ${dtb} ; run netargs ; bootm ${loadaddr} - ${fdtaddr}
+uenvcmd=run netboot
